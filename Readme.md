@@ -186,13 +186,13 @@ Este proyecto ha sido posible gracias al apoyo y colaboración de diversas insti
 - **Asesor:** Dr. Miguel Felix Mata Rivera
   **Contacto:** migfel@gmail.com
 
-- **Estudiante 1:** Curiel García Juan Jesús 
+- **Estudiante:** Curiel García Juan Jesús 
   **Contacto:** curielgarciajuanjesus@gmail.com
 
-- **Estudiante 2:** Miranda Rodriguez Ana Sofía  
+- **Estudiante:** Miranda Rodriguez Ana Sofía  
   **Contacto:** miranda.rodriguez.anasofia.19@gmail.com
 
-- **Estudiante 3:** Vargas Montero Ulises
+- **Estudiante:** Vargas Montero Ulises
   **Contacto:** uvm88gato@gmail.com
 
 
