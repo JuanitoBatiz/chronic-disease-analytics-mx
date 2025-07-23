@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Explorar Enfermedades</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+
+  <div class="container">
+
+      <h1 class="titulo mb-3">🧪 Explorador de Enfermedades Crónicas</h1>
+      <p class="frase">Selecciona una enfermedad para visualizar sus estadísticas y gráficas.</p>
+      
+      <hr class="linea">
+
+    <div class="d-flex justify-content-center gap-3 flex-wrap mb-4">
+      <button class="btn-custom btn-diabetes" onclick="cargarDatos('diabetes')">🩺 Diabetes</button>
+      <button class="btn-custom btn-cancer" onclick="cargarDatos('cancer')">🧪 Cáncer</button>
+    </div>
+
+  <div id="resultado" class="mt-4">Haz clic en una enfermedad para comenzar.</div>
+
+  <div id="seccion-datos" style="display: none;">
+    <div id="resumen-datos" class="row row-cols-1 row-cols-md-2 g-3 justify-content-center mb-4"></div>
+    <div id="contenedor-graficas"></div>
+  </div>
+</div>
+
+<script>
+  function cargarDatos(enfermedad) {
+    document.getElementById("resultado").innerText = `🔄 Cargando datos para: ${enfermedad}...`;
+
+    fetch(`/api/enfermedad/${enfermedad}`)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("seccion-datos").style.display = "block";
+        document.getElementById("resultado").innerHTML = `
+        <h5>✔️ Datos cargados para: ${data.enfermedad}</h5>
+        <hr class="espacio-botones">`;
+
+        const resumen = document.getElementById("resumen-datos");
+        resumen.innerHTML = `
+          <div class="col">
+            <div class="card tarjeta">
+              <div class="card-body text-center">
+                <h6 class="card-title">📊 Egresos</h6>
+                <p class="card-text">${data.datos.egresos.toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card tarjeta">
+              <div class="card-body text-center">
+                <h6 class="card-title">☠️ Defunciones</h6>
+                <p class="card-text">${data.datos.defunciones.toLocaleString()}</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card tarjeta">
+              <div class="card-body text-center">
+                <h6 class="card-title">🎂 Edad promedio</h6>
+                <p class="card-text">${data.datos.edad_promedio} años</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="card tarjeta">
+              <div class="card-body text-center">
+                <h6 class="card-title">⚧ Distribución por sexo</h6>
+                <p class="card-text">
+                  ${Object.entries(data.datos.sexo).map(([k, v]) => `${k}: ${v}%`).join(" | ")}
+                </p>
+              </div>
+            </div>
+          </div>
+        `;
+
+
+        const contenedor = document.getElementById("contenedor-graficas");
+        contenedor.innerHTML = "";
+
+        for (const [tipo, graficas] of Object.entries(data.graficas)) {
+          if (graficas.length > 0) {
+            const seccion = document.createElement("div");
+            seccion.innerHTML = `
+              <hr class="linea">
+              <h3 class="mt-4 text-capitalize">${tipo}</h3>`;
+
+            const row = document.createElement("div");
+            row.classList.add("row", "justify-content-center", "mb-4");
+
+            graficas.forEach((g, index) => {
+              const col = document.createElement("div");
+              col.classList.add("col-md-6", "mb-3");
+
+              const iframe = document.createElement("iframe");
+              iframe.src = g.ruta;
+              iframe.width = "100%";
+              iframe.height = "450";
+              iframe.classList.add("mb-2");
+
+              const desc = document.createElement("p");
+              desc.classList.add("descripcion-grafica", "text-center"); 
+
+              desc.innerText = g.descripcion || "";
+
+              col.appendChild(iframe);
+              col.appendChild(desc);
+              row.appendChild(col);
+            });
+
+seccion.appendChild(row);
+
+
+            contenedor.appendChild(seccion);
+          }
+        }
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        document.getElementById("resultado").innerText = "❌ Error al cargar datos.";
+      });
+  }
+</script>
+</body>
+</html>
+

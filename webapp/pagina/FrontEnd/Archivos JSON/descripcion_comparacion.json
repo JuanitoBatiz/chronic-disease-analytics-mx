@@ -1,0 +1,5 @@
+{
+  "evolucion_casos": "Esta gráfica muestra la evolución del número total de casos entre los años seleccionados. Permite observar el crecimiento, disminución o estabilidad de los casos de la enfermedad elegida en el tiempo.",
+  "cambios_mortalidad": "Aquí se representa el número total de defunciones reportadas por año para la enfermedad seleccionada. Es útil para comparar directamente el impacto entre dos periodos.",
+  "variacion_grupo_edad": "Esta gráfica compara la distribución de defunciones por grupo de edad entre ambos años seleccionados. Permite identificar qué rangos etarios se han visto más afectados en cada periodo."
+}

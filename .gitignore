@@ -1,0 +1,21 @@
+# Ignorar datos crudos, limpios y finales
+data/raw/
+data/cleaned/
+data/final/
+
+# Ignorar gráficas generadas automáticamente
+eda/plots/
+
+# Archivos temporales de Jupyter
+**/.ipynb_checkpoints/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos PDF del proyecto
+docs/*.pdf
+
+# Entorno virtual y archivos sensibles
+venv/
+.env/

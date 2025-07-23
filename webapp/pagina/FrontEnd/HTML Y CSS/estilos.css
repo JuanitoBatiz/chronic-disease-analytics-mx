@@ -1,0 +1,221 @@
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(to right, #4f6d7a, #8cabb7);
+  margin: 0;
+  padding: 2rem;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.titulo {
+  color: #222;
+  margin-bottom: 1rem;
+}
+
+.frase {
+  font-style: oblique;
+  color: #555;
+  font-size: larger;
+}
+
+.linea {
+  border: none;
+  height: 4px;
+  background-color: #658694;
+  width: 90%;
+  margin: 2.5rem auto;
+  border-radius: 4px;
+  margin-top: 2.5rem;
+  opacity: 1;
+}
+
+.btn-custom {
+  display: inline-block;      
+  width: 320px;     
+  height: 65px;     
+  text-align: start;
+  padding: 1.15rem 1rem;
+  font-size: 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: rgb(67, 67, 69);
+  font-weight: bold;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+
+.btn-custom:hover {
+  transform: scale(1.03);
+  filter: brightness(0.95);
+}
+/*botoncitos*/
+.espacio-botones {
+  margin-top: 3.75rem; 
+}
+
+.btn-explorar {
+  background-color: #a9d4c3;
+}
+
+.btn-mapa {
+  background-color: #cca3a3;
+}
+
+.btn-comparar {
+  background-color: #a395b3;
+}
+
+.btn-reporte {
+  background-color: #9dacc1;
+}
+.btn-cancer{
+    background-color: #efcca1;
+}
+.btn-diabetes{
+    background-color: #edf093;
+}
+.emoji {
+  font-size: 1.78rem;    
+  line-height: 1;        
+  vertical-align: middle;
+  margin-right: 0.5rem;
+}
+/**/
+/*enfermedad*/
+iframe {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+ul {
+  list-style: none;
+  padding-left: 0;
+}
+ul li::before {
+  content: "• ";
+  color: #555;
+}
+#resultado {
+  margin-top: 2rem;
+  font-size: 20px;
+  color: rgb(170, 103, 41);
+}
+.descripcion-grafica {
+  font-size: 15px;
+  color: #555;
+  margin-top: 6px;
+  font-style: italic;
+}
+.tarjeta {
+  border-radius: 16px;
+  background-color: #f7f9fb;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease;
+}
+
+.tarjeta:hover {
+  transform: scale(1.02);
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.card-text {
+  font-size: 1.25rem;
+  color: #333;
+}
+/*mapas*/
+.mapa-img {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.descripcion-mapa {
+  font-size: 16px;
+  color: #444;
+  margin-top: 12px;
+  margin-bottom: 36px;
+  text-align: justify;
+}
+.mapa-img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+/*comparar*/
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .tab {
+    flex: 1;
+    padding: 1rem;
+    background: #ddd;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    border: 1px solid #ccc;
+  }
+  .tab.active {
+    background-color: rgb(108, 84, 114);
+    color: white;
+  }
+  .grafica-container {
+    padding: 0.5rem;
+    width: 500px;
+    align-items: center;
+  }
+
+  iframe {
+    width: 100%;
+    height: 460px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  .grafica-desc {
+    font-size: 15px;
+    text-align: center;
+    color: #444;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+/*pdf*/
+.formulario-reporte {
+  max-width: 500px;
+  background-color: #ffffff;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.btn-success {
+  background-color: #3dbd7d;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #34a06a;
+}

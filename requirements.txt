@@ -1,0 +1,7 @@
+flask==3.0.3
+pandas==2.3.1
+plotly==6.2.0
+reportlab==4.1.0
+numpy==2.3.1
+kaleido==1.0.0
+notebook

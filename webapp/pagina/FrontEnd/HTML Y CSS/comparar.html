@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comparar Años</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+<div class="container py-5">
+  <h1 class="titulo mb-4">📊 Comparar Años</h1>
+
+  <hr class="linea">
+  
+  <!-- Tabs -->
+  <div class="tabs">
+    <div class="tab active" id="tab-cancer" onclick="mostrar('cancer')">🧪 Cáncer</div>
+    <div class="tab" id="tab-diabetes" onclick="mostrar('diabetes')">🩺 Diabetes</div>
+  </div>
+
+  <!-- Contenedor Cáncer -->
+  <div id="contenedor-cancer">
+    <div class="row justify-content-center">
+      <div class="col-md-6 grafica-container">
+        <iframe src="/static/graficas/comparar/cancer/linea_temporal_afecciones_cancer.html"></iframe>
+        <p class="grafica-desc">Evolución de afecciones por cáncer a lo largo de los años.</p>
+      </div>
+      <div class="col-md-6 grafica-container">
+        <iframe src="/static/graficas/comparar/cancer/linea_temporal_egresos_cancer.html"></iframe>
+        <p class="grafica-desc">Cambios en los egresos hospitalarios por cáncer.</p>
+      </div>
+      <div class="col-md-6 grafica-container">
+        <iframe src="/static/graficas/comparar/cancer/linea_temporal_defunciones_cancer.html"></iframe>
+        <p class="grafica-desc">Número de defunciones por cáncer con el paso de los años.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contenedor Diabetes -->
+  <div id="contenedor-diabetes" style="display:none">
+    <div class="row justify-content-center">
+      <div class="col-md-6 grafica-container">
+        <iframe src="/static/graficas/comparar/diabetes/linea_temporal_afecciones_diabetes.html"></iframe>
+        <p class="grafica-desc">Esta gráfica muestra la evolución de las afecciones por diabetes.</p>
+      </div>
+      <div class="col-md-6 grafica-container">
+        <iframe src="/static/graficas/comparar/diabetes/linea_temporal_egresos_diabetes.html"></iframe>
+        <p class="grafica-desc">Egresos hospitalarios por diabetes a lo largo del tiempo.</p>
+      </div>
+      <div class="col-md-6 grafica-container">
+        <iframe src="/static/graficas/comparar/diabetes/linea_temporal_defunciones_diabetes.html"></iframe>
+        <p class="grafica-desc">Evolución de las defunciones anuales por diabetes.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="linea">
+  
+  <div class="container mt-5">
+    <h2 class="mb-4"> Comparar Años de Enfermedades</h2>
+    <form id="form-comparacion" class="row g-3 mb-4">
+      <div class="col-md-4">
+        <label for="enfermedad" class="form-label">Enfermedad</label>
+        <select class="form-select" id="enfermedad" onchange="compararAnios()" required>
+          <option value="cancer">Cáncer</option>
+          <option value="diabetes">Diabetes</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="anio1" class="form-label">Año 1</label>
+        <select class="form-select" id="anio1" onchange="compararAnios()" required>
+          <option value="2013">2013</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="anio2" class="form-label">Año 2</label>
+        <select class="form-select" id="anio2" onchange="compararAnios()" required>
+          <option value="2013">2013</option>
+          <option value="2014">2014</option>
+          <option value="2015">2015</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+    </form>
+
+    <div id="resultados-dinamicos" class="row justify-content-center mt-4" style="display: none;">
+      <div class="col-md-10 text-center">
+        <h4 class="mb-4">📊 Resultados comparativos</h4>
+      </div>
+      <div class="col-md-6 grafica-container">
+        <div id="grafica-comparativa-1"></div>
+        <div class="descripcion">{{ grafica.descripcion }}</div>
+      </div>
+      <div class="col-md-6 grafica-container">
+        <div id="grafica-comparativa-2"></div>
+        <div class="descripcion">{{ grafica.descripcion }}</div>
+      </div>
+      <div class="col-md-6 grafica-container">
+        <div id="grafica-comparativa-3"></div>
+        <div class="descripcion">{{ grafica.descripcion }}</div>
+      </div>
+
+      <div class="col-md-12 mt-4">
+        <p class="grafica-desc text-center" id="explicacion-dinamica"></p>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-4">
+  <a id="btn-descargar" class="btn btn-custom" href="#" download>
+    📥 Descargar datos crudos (CSV)
+  </a>
+</div>
+</div>
+
+<script>
+  function mostrar(enf) {
+    document.getElementById("contenedor-cancer").style.display = enf === "cancer" ? "block" : "none";
+    document.getElementById("contenedor-diabetes").style.display = enf === "diabetes" ? "block" : "none";
+    document.getElementById("tab-cancer").classList.toggle("active", enf === "cancer");
+    document.getElementById("tab-diabetes").classList.toggle("active", enf === "diabetes");
+  }
+
+  function compararAnios() {
+    const enf = document.getElementById("enfermedad").value;
+    const anio1 = document.getElementById("anio1").value;
+    const anio2 = document.getElementById("anio2").value;
+
+    fetch(`/api/comparar/${enf}/${anio1}/${anio2}`)
+      .then(res => res.json())
+      .then(data => {
+        const container = document.getElementById("resultados-dinamicos");
+        container.style.display = "flex";
+
+        document.getElementById("grafica-comparativa-1").innerHTML = `<iframe src="${data.graficas[0].ruta}" width="100%" height="450"></iframe>`;
+        document.getElementById("grafica-comparativa-2").innerHTML = `<iframe src="${data.graficas[1].ruta}" width="100%" height="450"></iframe>`;
+        document.getElementById("grafica-comparativa-3").innerHTML = `<iframe src="${data.graficas[2].ruta}" width="100%" height="450"></iframe>`;
+        document.getElementById("explicacion-dinamica").innerText = data.explicacion;
+        document.getElementById("btn-descargar").href = `/descargar/${enf}/${anio1}/${anio2}`;
+      });
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio | Explorador</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet"  href="{{ url_for('static', filename='estilos.css') }}">
+
+</head>
+<body>
+
+  <div class="container">
+
+      <h1 class="titulo mb-3">Explorador de Enfermedades Crónicas</h1>
+      <p class="frase">
+        Visualiza datos de <strong>cáncer</strong> y <strong>diabetes</strong> en México.
+      </p>
+
+      <hr class="linea">
+
+      <div class="row justify-content-between espacio-botones gx-3 gy-3" style="max-width: 700px; margin: auto;">
+        <div class="col-md-6 col-lg-6">
+          <a href="/explorar" class="btn-custom btn-explorar">
+            <span class="emoji"> 🧪 </span> Explorar por enfermedad</a>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <a href="/visualizar" class="btn-custom btn-mapa">
+            <span class="emoji">🗺️ </span> Distribución geográfica</a>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <a href="/comparar" class="btn-custom btn-comparar">
+            <span class="emoji">📊 </span> Comparar datos por años </a>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <a href="/reporte" class="btn-custom btn-reporte">
+            <span class="emoji">📥</span> Descargar reporte PDF</a>
+        </div>
+      </div>
+
+    
+  </div> 
+
+</body>
+</html>
